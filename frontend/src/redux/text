@@ -1,0 +1,33 @@
+user routes => 
+
+
+router.post("/signup", signup);
+router.post("/signin", signin);
+router.get("/logout", logout);
+router.get("/myprofile", isAuth, getMyProfile);
+router.put("/update/myprofile", isAuth, updateMyProfile);
+router.delete('/delete/myaccount', isAuth, deleteMyAccount)
+router.get("/myposts", isAuth, getMyPost)
+router.get("/user/search", isAuth, getUserList)
+router.get("/user/profile/:id", isAuth, getUserProfile)
+router.get("/user/post/:id", isAuth, getUserSinglePost)
+router.post("/update/password", isAuth, updatePassword)
+router.post("/forgate/password", forgatePassword)
+router.post("/reset/password", resetPassword);
+router.post("/user/follow/:id", isAuth, userFollow)
+router.delete("/remove/follower/:id", isAuth, removeFollowers);
+exports.router = router;
+
+
+
+post routes =>
+
+
+  .post("/post/upload", isAuth, createPost)
+  .get("/posts", isAuth, getPostOfFollowings)
+  .get("/post/likeandunlike/:id", isAuth, postLikeAndUnlike)
+  .put("/post/update/:id", isAuth, updateCaption)
+  .delete("/post/delete/:id", isAuth, deletePost)
+  .post("/post/comment/:id", isAuth, commentOnPOst)
+  .put("/comment/edit/:id", isAuth, commentEdit)
+  .delete("/comment/delete/:id", isAuth, deleteComment);

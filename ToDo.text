@@ -1,0 +1,40 @@
+
+backned />
+
+1 notification schemas and croller still pending..
+2 chatting fuctionality and web socket still pending..
+3 deleting profile from user still pending...
+4 new user confermtion with email and otp still pending...
+5 explore api, suggestions and block featueres pending...
+6 google and facebook auth pending...
+7 saved collection pending...
+8 story schemas and crollers still pending from scretch...
+
+
+
+user routes => 
+
+router.put("/update/myprofile", isAuth, updateMyProfile);
+router.delete('/delete/myaccount', isAuth, deleteMyAccount)
+router.get("/myposts", isAuth, getMyPost)
+router.get("/user/search", isAuth, getUserList)
+router.get("/user/profile/:id", isAuth, getUserProfile)
+router.get("/user/post/:id", isAuth, getUserSinglePost)
+router.post("/update/password", isAuth, updatePassword)
+router.post("/forgate/password", forgatePassword)
+router.post("/reset/password", resetPassword);
+router.post("/user/follow/:id", isAuth, userFollow)
+router.delete("/remove/follower/:id", isAuth, removeFollowers);
+exports.router = router;
+
+
+post routes =>
+
+  .post("/post/upload", isAuth, createPost)
+  .get("/posts", isAuth, getPostOfFollowings)
+  .get("/post/likeandunlike/:id", isAuth, postLikeAndUnlike)
+  .put("/post/update/:id", isAuth, updateCaption)
+  .delete("/post/delete/:id", isAuth, deletePost)
+  .post("/post/comment/:id", isAuth, commentOnPOst)
+  .put("/comment/edit/:id", isAuth, commentEdit)
+  .delete("/comment/delete/:id", isAuth, deleteComment);

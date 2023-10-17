@@ -1,0 +1,23 @@
+.upload-cont {
+  width: 400px;
+}
+
+.uploader-head {
+  min-height: 310px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.uploader-head img {
+  height: 310px;
+  width: auto;
+  object-fit: cover;
+}
+
+.upload-caption {
+  border: 1px solid black;
+  padding: 10px;
+}
