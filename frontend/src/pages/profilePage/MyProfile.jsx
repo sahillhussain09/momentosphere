@@ -20,6 +20,8 @@ function MyProfile() {
         loadMyPosts(getMyPosts())
     }, [])
 
+
+
     console.log(user);
 
     return (

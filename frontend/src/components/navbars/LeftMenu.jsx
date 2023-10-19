@@ -13,7 +13,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { loadUser, logOut } from "../../redux/actions/UserActions";
 import dummyImg from "../../assets/images/dummyuserprofile.png"
 import { RotatingLines } from "react-loader-spinner";
-import Uploder from "../../pages/upload/Uploder"
+import { Button } from "@mui/material";
+import Uploder from "../create/Uploder"
 
 function LeftMenu() {
 
@@ -76,8 +77,11 @@ function LeftMenu() {
         </Link>
 
         <div className="logout">
-          <button className="logout-btn" type="text" onClick={logoutHandle}>
-            {
+          <Button variant="outlined" size="small" color="secondary" sx={{
+            width: "100%",
+            textTransform: "capitalize",
+            marginTop: "10px"
+          }} onClick={logoutHandle}> {
               loading ? <RotatingLines
                 strokeColor="white"
                 strokeWidth="5"
@@ -85,8 +89,8 @@ function LeftMenu() {
                 width="22"
                 visible={true}
               /> : "logout"
-            }
-          </button>
+            }</Button>
+
         </div>
       </div>
 

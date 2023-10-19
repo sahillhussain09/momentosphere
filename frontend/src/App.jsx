@@ -12,7 +12,6 @@ import { userLoginAction } from "./redux/actions/UserActions";
 import { loadUser } from "./redux/actions/UserActions";
 import { useSelector, useDispatch } from "react-redux";
 import MyProfile from "./pages/profilePage/MyProfile";
-import Upload from "./pages/upload/Upload";
 
 
 export const authContext = createContext();
@@ -64,10 +63,6 @@ function App() {
       element: <MyProfile />,
     },
 
-    {
-      path: '/upload',
-      element: <Upload />
-    }
   ]);
 
   return (

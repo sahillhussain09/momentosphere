@@ -67,7 +67,7 @@
   align-items: center;
   justify-content: space-between;
   font-family: "Nunito", sans-serif;
-  margin: 0px 5px;
+  margin: 0px 10px;
 }
 
 .my-info h2 {
@@ -95,13 +95,19 @@
   margin-top: 2px;
 }
 
-.connections-info {
+/* .connections-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+} */
+
+.info-btns {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
 }
 
-.connections-info button {
+.info-btns button {
   display: flex;
   justify-content: center;
   align-items: center;

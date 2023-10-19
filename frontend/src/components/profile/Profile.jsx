@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaUserEdit } from "react-icons/fa"
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Posts from "../common_components/posts"
+import Button from '@mui/material/Button';
+import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
+import { IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { getMyPosts } from "../../redux/actions/UserActions";
 
 function Profile({ username,
   name,
@@ -16,7 +21,6 @@ function Profile({ username,
   ownerAccount,
   posts
 }) {
-
 
   const [value, setValue] = useState("posts");
 
@@ -41,44 +45,49 @@ function Profile({ username,
           <div className="my-info">
             <h2>{username}</h2>
             {
-              ownerAccount ? <button className="profile-editbtn"> <span ><FaUserEdit /></span>Edit Profile</button> : <button className="follow-btn"> Follow User</button>
+              ownerAccount ? <button className="profile-editbtn"> <span ><FaUserEdit /></span>Edit Profile</button> : <div> <Button variant="contained" size="small">Follow</Button> <IconButton color="secondary" aria-label="add an alarm">
+                <TextsmsOutlinedIcon />
+              </IconButton></div>
+
             }
           </div>
           <div className="connections-info">
-            <button className="followers-btn">
-              <span>
-                Posts
-              </span>
-              <span >
-                {posts.length}
-              </span>
-            </button>
-            <button className="followers-btn">
-              <span>
-                Followers
-              </span>
-              <span >
-                {followers.length}
-              </span>
-            </button>
-            <button className="followings-btn">
-              <span>
-                Followings
-              </span>
-              <span >
-                {followings.length}
-              </span>
-            </button>
+            <div className="info-btns">
+              <button className="followers-btn">
+                <span>
+                  Posts
+                </span>
+                <span >
+                  {posts.length}
+                </span>
+              </button>
+              <button className="followers-btn">
+                <span>
+                  Followers
+                </span>
+                <span >
+                  {followers.length}
+                </span>
+              </button>
+              <button className="followings-btn">
+                <span>
+                  Followings
+                </span>
+                <span >
+                  {followings.length}
+                </span>
+              </button>
+            </div>
           </div>
-
           <div className="prfile-mid">
             <p>
               {bio}
             </p>
             <a href={socialLinks}>{socialLinks}</a>
           </div>
+
         </div>
-      </div>
+      </div >
 
       <div className="profile-bottom">
         <Box sx={{
