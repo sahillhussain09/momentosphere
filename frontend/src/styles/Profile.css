@@ -7,7 +7,8 @@
 }
 
 .profile-box {
-  border: 1px solid red;
+  /* border: 1px solid red; */
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   width: 50%;
   overflow-y: scroll;
 }
@@ -24,22 +25,23 @@
 
 .profile-suggestions {
   width: 25%;
-  border: 1px solid goldenrod;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .profile-head {
   display: flex;
   width: 100%;
   margin-bottom: 30px;
-  padding: 20px 10px;
+  padding: 20px 0px;
+  justify-content: space-between;
 }
 
 .left-myprofile {
   width: 40%;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .left-myprofile img {
@@ -120,4 +122,9 @@
 .prfile-mid a {
   text-decoration: none;
   margin-left: 0px;
+}
+
+.profile-posts {
+  width: 90%;
+  margin: 20px auto;
 }

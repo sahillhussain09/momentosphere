@@ -44,6 +44,7 @@ function MyProfile() {
                 }
             </div>
             <div className='profile-suggestions'>
+                suggestions
             </div>
         </div>
     )

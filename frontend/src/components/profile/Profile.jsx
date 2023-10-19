@@ -26,7 +26,7 @@ function Profile({ username,
 
   // custom styles for material componets
   const tabStyle = {
-    margin: "0px 15px",
+    margin: "0px 30px",
     textTransform: "lowercase"
   }
 
@@ -103,31 +103,34 @@ function Profile({ username,
           </Tabs>
         </Box>
 
-        {
-          value === "posts" ? posts.length > 0 ? posts.map((post) => {
-            return (
-              <Posts
-                caption={post.caption}
-                comments={post.comments}
-                likes={post.likes}
-                uploadTime={post.created}
-                postImg={post.image.path}
-                owner_profile={profilePicture}
-                username={username}
-                postId={post._id}
+        <div className="profile-posts">
+          {
+            value === "posts" ? posts.length > 0 ? posts.map((post) => {
+              return (
+                <Posts
+                  caption={post.caption}
+                  comments={post.comments}
+                  likes={post.likes}
+                  uploadTime={post.created}
+                  postImg={post.image.path}
+                  owner_profile={profilePicture}
+                  username={username}
+                  postId={post._id}
 
-              />
-            )
-          }) : <h1>no posts here...</h1> : null
-        }
+                />
+              )
+            }) : <h1>no posts here...</h1> : null
+          }
 
-        {
-          value === "thougts" ? <h1>hello im Thougts</h1> : null
-        }
+          {
+            value === "thougts" ? <h1>hello im Thougts</h1> : null
+          }
 
-        {
-          value === "saved" ? <h1>hello i'm saved items only for owner</h1> : null
-        }
+          {
+            value === "saved" ? <h1>hello i'm saved items only for owner</h1> : null
+          }
+
+        </div>
       </div>
     </>
   );
