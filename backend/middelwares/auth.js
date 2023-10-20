@@ -1,10 +1,14 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const cookie = require("js-cookie");
 
 exports.isAuth = async (req, res, next) => {
   try {
     const token = req.header('Authorization')
+
+    console.log(temp);
+
 
     if (!token) {
       res.status(404).json({

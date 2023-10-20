@@ -27,7 +27,7 @@ export const userLoginAction = createAsyncThunk("login", async (userLogin, { rej
                 return rejectWithValue(loginResponse.data.error)
             }
 
-            loginResponse.data.token ? await Cookies.set("token", loginResponse.data.token) : null
+            loginResponse.data.token ? await Cookies.set("momentoSphere", loginResponse.data.token) : null
             result = await loginResponse.data
             return result
         }
@@ -67,7 +67,7 @@ export const loadUser = createAsyncThunk("loadUser", async (args, { rejectWithVa
         const { data } = await axios.get("http://127.0.0.1:7000/myprofile", {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${Cookies.get("token")}`
+                "Authorization": `Bearer ${Cookies.get("momentoSphere")}`
             }
         });
 
@@ -93,7 +93,7 @@ export const getPostOfFollowings = createAsyncThunk("postOfFollowings", async (a
         const { data } = await axios.get("http://127.0.0.1:7000/posts", {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${Cookies.get("token")}`
+                "Authorization": `Bearer ${Cookies.get("momentoSphere")}`
             }
         });
 
@@ -116,7 +116,7 @@ export const getMyPosts = createAsyncThunk("getMyPosts", async (args, { rejectWi
         const data = await axios.get("http://127.0.0.1:7000/myposts", {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${Cookies.get("token")}`
+                "Authorization": `Bearer ${Cookies.get("momentoSphere")}`
             }
         })
 
@@ -138,7 +138,7 @@ export const logOut = createAsyncThunk("logout", async (args, { rejectWithValue 
 
         const { data } = await axios.get("http://127.0.0.1:7000/logout");
         if (data.success) {
-            await Cookies.remove("token");
+            await Cookies.remove("momentoSphere");
         }
         return data
 

@@ -8,6 +8,7 @@ const { urlencoded } = require("express");
 const post = require("../models/post");
 require("dotenv").config();
 const cloudinary = require("cloudinary").v2;
+const Cookies = require("js-cookie");
 
 
 cloudinary.config({
@@ -41,6 +42,7 @@ exports.signup = async (req, res) => {
         expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
         httpOnly: true,
       };
+
 
       return res
         .status(201)

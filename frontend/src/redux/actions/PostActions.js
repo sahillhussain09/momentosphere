@@ -10,7 +10,7 @@ export const postLikeAndUnlike = createAsyncThunk("likeAndUnlike", async (args, 
         const { data } = await axios.get(`http://127.0.0.1:7000/post/likeandunlike/${args}`, {
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${Cookies.get("token")}`
+                "Authorization": `Bearer ${Cookies.get("momentoSphere")}`
             }
         })
 
@@ -36,7 +36,7 @@ export const postUpload = createAsyncThunk("postUpload", async (formData, { reje
         const { data } = await axios.post('http://127.0.0.1:7000/post/upload', formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
-                "Authorization": `Bearer ${Cookies.get("token")}`
+                "Authorization": `Bearer ${Cookies.get("momentoSphere")}`
             }
         })
 

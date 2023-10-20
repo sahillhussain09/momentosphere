@@ -22,7 +22,7 @@ function App() {
 
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const authToken = Cookies.get("token")
+  const authToken = Cookies.get("momentoSphere")
 
 
   useEffect(() => {
