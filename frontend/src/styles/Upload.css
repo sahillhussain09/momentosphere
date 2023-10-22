@@ -21,3 +21,21 @@
   border: 1px solid black;
   padding: 10px;
 }
+
+/* profile upload styling... */
+
+.update-profilePic {
+  height: 220px;
+  object-fit: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.update-profilePic img {
+  height: 200px;
+  width: 200px;
+  padding: 10px;
+  border-radius: 50%;
+}

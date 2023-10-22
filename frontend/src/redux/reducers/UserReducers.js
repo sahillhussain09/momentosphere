@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLoginAction, userRegisterAction, loadUser, getPostOfFollowings, logOut, getMyPosts } from "../actions/UserActions"
+import { userLoginAction, userRegisterAction, loadUser, getPostOfFollowings, logOut, getMyPosts, updateProfile } from "../actions/UserActions"
 import { accordionActionsClasses } from "@mui/material";
 
 
@@ -142,6 +142,35 @@ export const getPostOfFollowingsReducer = createSlice({
         }
     }
 })
+
+
+// your profile update reducer 
+
+export const profileUpdateReducer = createSlice({
+    name: "updateProfileReducer",
+    initialState: {
+        loading: false,
+        data: null,
+        error: null
+    },
+
+    extraReducers: {
+        [updateProfile.pending]: (state) => {
+            state.loading = true
+        },
+
+        [updateProfile.fulfilled]: (state, action) => {
+            state.loading = false,
+                state.data = action.payload
+        },
+
+        [updateProfile.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action.payload
+        }
+    }
+})
+
 
 export const logoutReducer = createSlice({
     name: "logoutReducer",

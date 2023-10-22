@@ -9,6 +9,7 @@ import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
 import { IconButton } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getMyPosts } from "../../redux/actions/UserActions";
+import ProfileUpdate from "../update/ProfileUpdate"
 
 function Profile({ username,
   name,
@@ -23,10 +24,16 @@ function Profile({ username,
 }) {
 
   const [value, setValue] = useState("posts");
+  const [open, setOpen] = React.useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
 
   // custom styles for material componets
   const tabStyle = {
@@ -45,7 +52,7 @@ function Profile({ username,
           <div className="my-info">
             <h2>{username}</h2>
             {
-              ownerAccount ? <button className="profile-editbtn"> <span ><FaUserEdit /></span>Edit Profile</button> : <div> <Button variant="contained" size="small">Follow</Button> <IconButton color="secondary" aria-label="add an alarm">
+              ownerAccount ? <button className="profile-editbtn" onClick={handleClickOpen}> <span ><FaUserEdit /></span>Edit Profile</button> : <div> <Button variant="contained" size="small">Follow</Button> <IconButton color="secondary" aria-label="add an alarm">
                 <TextsmsOutlinedIcon />
               </IconButton></div>
 
@@ -141,6 +148,9 @@ function Profile({ username,
 
         </div>
       </div>
+
+      <ProfileUpdate setOpen={setOpen} open={open} />
+
     </>
   );
 

@@ -21,9 +21,6 @@ function MyProfile() {
     }, [])
 
 
-
-    console.log(user);
-
     return (
         <div className='profile-container'>
             <div className='profile-sidemenu'>

@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { loadUserReducer, loginSlice, registerSlice, getPostOfFollowingsReducer, logoutReducer, getMyPostsReducer } from "./reducers/UserReducers"
+import { loadUserReducer, loginSlice, registerSlice, getPostOfFollowingsReducer, logoutReducer, getMyPostsReducer, profileUpdateReducer } from "./reducers/UserReducers"
 import { postLikeAndUnlikeReducer, postUploadReducer } from "./reducers/PostReducers";
 
 const rootReducer = combineReducers({
@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
     loadMyProfile: loadUserReducer.reducer,
     getMyPosts: getMyPostsReducer,
     postsOfFollowings: getPostOfFollowingsReducer.reducer,
+    updateProfile: profileUpdateReducer.reducer,
     logoutReducer: logoutReducer.reducer,
     // posts
     postUpload: postUploadReducer.reducer,

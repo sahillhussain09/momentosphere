@@ -165,9 +165,7 @@ exports.updateMyProfile = async (req, res) => {
 
   try {
 
-    const { name, bio, url } = req.body;
-
-    const profile = req.files.profile;
+    const { name, bio, url, profile } = req.body;
 
     const loggedUser = await User.findById(req.user._id);
     // console.log(loggedUser);
@@ -181,10 +179,10 @@ exports.updateMyProfile = async (req, res) => {
 
     if (profile) {
       loggedUser.profile.public_id && await cloudinary.uploader.destroy(loggedUser.profile.public_id, (err, result) => {
-        err ? console.log("cloudinary destroyer ERROR", err) : "";
+        err ? console.log("cloudinary destroyer ERROR", err) : console.log("cloudnary profile upload result", result);
       });
 
-      const avatar = await cloudinary.uploader.upload(profile.tempFilePath, {
+      const avatar = await cloudinary.uploader.upload(req.body.profile, {
         folder: "user_profiles"
       }, (err, result) => err ? console.log("clooudinary uploder ERROR", err) : "");
 
@@ -205,7 +203,7 @@ exports.updateMyProfile = async (req, res) => {
     }
 
     await loggedUser.save();
-    console.log(loggedUser);
+    // console.log(loggedUser);
     return res.status(201).json({
       success: true,
       message: "profile has been updated."

@@ -25,6 +25,7 @@ export default function AlertDialogSlide({ open, setOpen }) {
     const uploadDispatch = useDispatch();
     const { loading, data, error } = useSelector((state) => state.postUpload);
 
+
     useEffect(() => {
         loadMyProfile(loadUser())
     }, [])
@@ -32,13 +33,12 @@ export default function AlertDialogSlide({ open, setOpen }) {
 
     const [uploadFile, setUploadFile] = useState(null);
     const [caption, setCaption] = useState('')
-    const [formdata, setFormData] = useState({})
 
 
     const handleClose = () => {
         setOpen(false);
         setUploadFile(null)
-        setCaption(null)
+        setCaption("")
     };
 
     const handleFile = (event) => {

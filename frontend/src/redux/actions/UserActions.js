@@ -133,6 +133,30 @@ export const getMyPosts = createAsyncThunk("getMyPosts", async (args, { rejectWi
 })
 
 
+export const updateProfile = createAsyncThunk("updateProfile", async (args, { rejectWithValue }) => {
+
+    try {
+
+        const { data } = await axios.put("http://127.0.0.1:7000/update/myprofile", args, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                "Authorization": `Bearer ${Cookies.get("token")}`
+            }
+        });
+
+        if (!data.success) {
+            return data.error
+        } else {
+            return data;
+        }
+
+
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+
+})
+
 export const logOut = createAsyncThunk("logout", async (args, { rejectWithValue }) => {
     try {
 
