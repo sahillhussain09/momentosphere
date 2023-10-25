@@ -16,30 +16,53 @@ import { postUpload } from '../../redux/actions/PostActions';
 import { Typography } from '@mui/material';
 
 
+// material ui transition 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function AlertDialogSlide({ open, setOpen }) {
 
+    // load my profile and post upload redux dispatch 
     const loadMyProfile = useDispatch()
     const uploadDispatch = useDispatch();
+
+
+    //    destructuring postupload data from redux reducer
     const { loading, data, error } = useSelector((state) => state.postUpload);
 
 
     const [uploadFile, setUploadFile] = useState(null);
     const [caption, setCaption] = useState('')
-    const [postCreated, setPostCreated] = useState(data && data.success ? true : false)
+    const [postCreated, setPostCreated] = useState(false)
 
+
+    // this useEffect for controlling postcreated state on post uploded data for returning contend in dialog box
+
+    useEffect(() => {
+        if (data && data.success) {
+            setPostCreated(true)
+        } else {
+            setPostCreated(false)
+        }
+    }, [data])
+
+
+    // this function handle somestates onclick cancel btn 
 
     const handleClose = () => {
         loadMyProfile(loadUser())
         setOpen(false);
         setUploadFile(null)
         setCaption("")
-        setPostCreated(false);
+
+        // this timeout for removing post upload input contend by setPostCreated after 1500 milliseconds
+        setTimeout(() => {
+            setPostCreated(false)
+        }, 500);
     };
 
+    // file reader function for showing local image in Imagetag
     const handleFile = (event) => {
         let selectedFile = event.target.files[0];
         setUploadFile(selectedFile);
@@ -58,20 +81,20 @@ export default function AlertDialogSlide({ open, setOpen }) {
 
     }
 
+    // here we calling postUpload api 
     const handleUpload = (e) => {
         let formdata = new FormData();
 
-        if (uploadFile && caption) {
+        if (uploadFile) {
 
             formdata.append("image", uploadFile);
             formdata.append("caption", caption);
-
-            // console.log("formData", formdata);
 
             uploadDispatch(postUpload(formdata))
         }
     }
 
+    // material ui style for components
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
         clipPath: 'inset(50%)',
@@ -119,15 +142,21 @@ export default function AlertDialogSlide({ open, setOpen }) {
                                 <TextField id="standard-basic" label="Write caption here..." value={caption} variant="standard" onChange={(e) => setCaption(e.target.value)} />
                             </Box>
 
-                        </div> : <div className='upload-cont'> <Typography variant='h3'>{data && data.message}</Typography> </div>
+                        </div> : <div className='upload-cont'> <Typography sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            letterSpacing: "1px"
+
+                        }} variant='h4'>{data.success ? data.message : "Oops! something went wrong"}</Typography></div>
                     }
                 </DialogContent>
                 <DialogActions>
                     <Button size='small' color='error' onClick={handleClose}>Cancel</Button>
                     {
-                        <Button size='small' variant="contained" color="success" onClick={handleUpload}>
+                        !postCreated ? <Button size='small' variant="contained" color="success" onClick={handleUpload}>
                             {loading ? "uploading..." : "upload"}
-                        </Button>
+                        </Button> : null
                     }
                 </DialogActions>
             </Dialog>
