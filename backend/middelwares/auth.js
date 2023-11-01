@@ -4,7 +4,9 @@ require("dotenv").config();
 
 exports.isAuth = async (req, res, next) => {
   try {
-    const token = req.header('Authorization')
+    const token = req.header('Authorization');
+
+    // console.log(token);
 
     if (!token) {
       res.status(404).json({
@@ -12,9 +14,7 @@ exports.isAuth = async (req, res, next) => {
         message: "please login first.",
       });
     } else {
-
-      // console.log(token);
-
+      // console.log( "token", token);
       const decodeToken = await jwt.verify(token.split(" ")[1], process.env.JWT_SECRETE_key);
       req.user = await User.findById(decodeToken._id);
       next();
@@ -23,7 +23,7 @@ exports.isAuth = async (req, res, next) => {
       //   next();
     }
   } catch (error) {
-    console.log(error);
+    // console.log("Auth ERROR", error);
     res.status(500).json({
       success: false,
       message: error.message,
