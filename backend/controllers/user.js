@@ -90,6 +90,8 @@ exports.signin = async (req, res) => {
       const options = {
         expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
         httpOnly: true,
+        sameSite: 'None',
+        secure: true,
       };
 
       return res
@@ -439,6 +441,8 @@ exports.userFollow = async (req, res) => {
     const userToFollow = await User.findById(req.params.id);
     const loggedUser = await User.findById(req.user._id);
 
+    // console.log(userToFollow);
+
     if (!userToFollow) {
       res.status(404).json({
         success: false,
@@ -447,11 +451,11 @@ exports.userFollow = async (req, res) => {
     } else {
       // here if user alreday exist in following list than unfollowed him
       if (loggedUser.following.includes(req.params.id)) {
-        const folloingIndex = loggedUser.followers.indexOf(loggedUser._id);
+        const folloingIndex = loggedUser.following.indexOf(req.params.id);
         const followersIndex = userToFollow.followers.indexOf(loggedUser._id);
 
-        userToFollow.followers.splice(followersIndex, 1);
-        loggedUser.following.splice(folloingIndex, 1);
+         userToFollow.followers.splice(followersIndex, 1);
+         loggedUser.following.splice(folloingIndex, 1);
 
         await userToFollow.save();
         await loggedUser.save();
@@ -475,6 +479,7 @@ exports.userFollow = async (req, res) => {
       }
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       success: false,
       message: error.message,
