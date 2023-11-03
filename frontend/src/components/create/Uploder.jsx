@@ -78,7 +78,6 @@ export default function AlertDialogSlide({ open, setOpen }) {
         } else {
             setUploadFile(null)
         }
-
     }
 
     // here we calling postUpload api 

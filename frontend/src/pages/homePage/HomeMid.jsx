@@ -41,7 +41,8 @@ function HomeMid() {
                 posts && posts.length > 0 ? posts.map((post, index) => {
                     return (
                         <>
-                            <Posts caption={post.caption}
+                            <Posts key={index}
+                                 caption={post.caption}
                                 comments={post.comments}
                                 likes={post.likes}
                                 uploadTime={post.created}
@@ -53,6 +54,7 @@ function HomeMid() {
                                 commentsBox={commentsBox}
                                 setPostId={setPostId}
                                 postKey={index}
+                                ownerId={post.owner._id}
                             />
                         </>
                     )

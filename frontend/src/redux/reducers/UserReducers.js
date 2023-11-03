@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userLoginAction, userRegisterAction, loadUser, getPostOfFollowings, logOut, getMyPosts, updateProfile } from "../actions/UserActions"
+import { userLoginAction, userRegisterAction, loadUser, getPostOfFollowings, logOut, getMyPosts, followUser, updateProfile, getUserProfile } from "../actions/UserActions"
 import { accordionActionsClasses } from "@mui/material";
 
 
@@ -90,29 +90,83 @@ export const loadUserReducer = createSlice({
     }
 })
 
-
-export const getMyPostsReducer = createSlice({
-    name: "GETMYPOSTS",
+export const userProfileReducer = createSlice({
+    name: "getUserProfile",
     initialState: {
         loading: false,
-        posts: null,
+        data: null,
         error: null
+    },
+
+    extraReducers: {
+        [getUserProfile.pending]: (state) => {
+            state.loading = true
+        },
+
+        [getUserProfile.fulfilled]: (state, action) => {
+            state.loading = false,
+                state.data = action.payload
+        },
+
+        [getUserProfile.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action.payload
+        }
+    }
+})
+
+// reducer for handle for follow user data
+
+export const followUserReducer = createSlice({
+    name: "followUser",
+    initialState: {
+        loading: false,
+        data: null,
+        error: null,
+    }, 
+                
+
+    extraReducers: {
+        [followUser.pending]: (state) => {
+            state.loading = true
+        },
+
+        [followUser.fulfilled]: (state, action) => {
+            state.loading = false,
+                state.data = action.payload
+        },
+
+
+        [followUser.rejected]: (state, action) => {
+            state.loading = false,
+                state.error = action.payload
+        }
+    }
+})
+
+
+export const getMyPostsReducer = createSlice({
+    name: "getMyPosts",
+    initialState: {
+       allPostsLoading: false,
+        allPostsData: null,
+        allPostsError: null
     },
 
     extraReducers: {
 
         [getMyPosts.pending]: (state) => {
-            state.loading = true
+            state.allPostsLoading = true
         },
 
         [getMyPosts.fulfilled]: (state, action) => {
-            state.loading = false,
-                state.posts = action.payload
+            state.allPostsLoading = false,
+                state.allPostsData = action.payload
         },
 
         [getMyPosts.rejected]: (state, action) => {
-            state.loading = false
-            state.error = action.payload
+            state.allPostsLoading = false
+            state.allPostsError = action.payload
         }
     }
 

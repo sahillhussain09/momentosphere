@@ -12,6 +12,7 @@ import { userLoginAction } from "./redux/actions/UserActions";
 import { loadUser } from "./redux/actions/UserActions";
 import { useSelector, useDispatch } from "react-redux";
 import MyProfile from "./pages/profilePage/MyProfile";
+import UserProfile from "./pages/profilePage/UserProfile";
 
 
 export const authContext = createContext();
@@ -62,6 +63,10 @@ function App() {
       path: "/myprofile",
       element: <MyProfile />,
     },
+    {
+      path: "/user_profile/:id",
+      element: <UserProfile />
+    }
 
   ]);
 

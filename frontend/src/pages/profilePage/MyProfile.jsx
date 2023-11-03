@@ -9,17 +9,25 @@ import ProfileLoading from '../../components/common_components/ProfileLoading'
 
 function MyProfile() {
 
-    const { loading, data, error } = useSelector((state) => state.loadMyProfile);
-    const loadProfileDispatch = useDispatch();
-    const loadMyPosts = useDispatch();
-    let user;
-    data ? user = data.user : null
+    const {allPostsLoading, allPostsData, allPostsError,} = useSelector((state) => state.getMyPosts)
 
     useEffect(() => {
         loadProfileDispatch(loadUser());
         loadMyPosts(getMyPosts())
     }, [])
 
+    const { loading, data, error } = useSelector((state) => state.loadMyProfile);
+
+    allPostsData &&  console.log("allPostsData", allPostsData.response);
+
+    const loadProfileDispatch = useDispatch();
+    const loadMyPosts = useDispatch();
+    let user;
+    data ? user = data.user : null
+
+
+
+    // console.log(allPostsData)
 
     return (
         <div className='profile-container'>
@@ -36,9 +44,9 @@ function MyProfile() {
                         profilePicture={user.profile.url}
                         followers={user.followers}
                         followings={user.following}
-                        ownerId={user._id}
+                        // ownerId={user._id}
                         ownerAccount={true}
-                        posts={user.posts}
+                       posts={user.posts}
                     />
                 }
             </div>

@@ -14,9 +14,7 @@ backned />
 
 user routes => 
 
-router.put("/update/myprofile", isAuth, updateMyProfile);
 router.delete('/delete/myaccount', isAuth, deleteMyAccount)
-router.get("/myposts", isAuth, getMyPost)
 router.get("/user/search", isAuth, getUserList)
 router.get("/user/profile/:id", isAuth, getUserProfile)
 router.get("/user/post/:id", isAuth, getUserSinglePost)
@@ -30,8 +28,6 @@ exports.router = router;
 
 post routes =>
 
-  .post("/post/upload", isAuth, createPost)
-  .get("/posts", isAuth, getPostOfFollowings)
   .get("/post/likeandunlike/:id", isAuth, postLikeAndUnlike)
   .put("/post/update/:id", isAuth, updateCaption)
   .delete("/post/delete/:id", isAuth, deletePost)

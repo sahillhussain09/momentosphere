@@ -1,9 +1,12 @@
 import { createAsyncThunk, } from "@reduxjs/toolkit";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { BsDatabaseCheck } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 
 let bearerToken = `Bearer ${Cookies.get("token")}`
+
 
 export const userLoginAction = createAsyncThunk("login", async (userLogin, { rejectWithValue }) => {
 
@@ -73,15 +76,40 @@ export const loadUser = createAsyncThunk("loadUser", async (args, { rejectWithVa
 
         if (!data.success) {
             return data.error
+        }{
+            return data
         }
-
-        return data
+    
 
     } catch (error) {
 
         return rejectWithValue(error)
     }
 
+})
+
+
+// get user profile
+
+export const getUserProfile = createAsyncThunk("getUserProfile", async (userId, { rejectWithValue }) => {
+    try {
+        const { data } = await axios.get(`http://127.0.0.1:7000/user/profile/${userId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${Cookies.get("token")}`
+            }
+        });
+        
+
+        if (!data.success) {
+            return data.error;
+        } else {
+            return data
+        }
+
+    } catch (error) {
+        return rejectWithValue(error);
+    }
 })
 
 
@@ -108,12 +136,35 @@ export const getPostOfFollowings = createAsyncThunk("postOfFollowings", async (a
     }
 })
 
+// this Action for follow user 
+
+export const followUser = createAsyncThunk("followToUser", async (ownerId, { rejectWithValue }) => {
+
+    try {
+      const {data} = await axios.post(`http://127.0.0.1:7000/user/follow/${ownerId}`, {}, {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${Cookies.get("token")}`
+        }
+      });
+
+     if(!data.success){
+      return data.message;
+
+     }else{
+        return data;
+     }
+
+    } catch (error) {
+       return rejectWithValue(error);
+    }
+})
 
 export const getMyPosts = createAsyncThunk("getMyPosts", async (args, { rejectWithValue }) => {
 
     try {
 
-        const data = await axios.get("http://127.0.0.1:7000/myposts", {
+        const { data } = await axios.get("http://127.0.0.1:7000/myposts", {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${Cookies.get("token")}`

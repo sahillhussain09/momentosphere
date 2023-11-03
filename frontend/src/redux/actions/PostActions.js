@@ -28,6 +28,54 @@ export const postLikeAndUnlike = createAsyncThunk("likeAndUnlike", async (args, 
 })
 
 
+export const postEditAction = createAsyncThunk("editCaption", async(postData) =>{
+    try {
+        
+        const postId= postData.postId;
+        const caption = postData.editCaption;
+
+        const {data} = await axios.put(`http://127.0.0.1:7000/post/update/${postId}`, {
+            caption
+        }, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${Cookies.get("token")}`
+            }
+        });
+        
+       return data;
+
+    } catch (error) {
+        return error
+    }
+});
+
+
+// this function for delete post 
+export const deleteYourPost = createAsyncThunk("deleteYourPost", async (postId, { rejectWithValue }) => {
+
+    try {
+
+        const { data } = await axios.delete(`http://127.0.0.1:7000/post/delete/${postId}`, {
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${Cookies.get("token")}`
+            }
+        });
+
+        if (!data.success) {
+            return data.error;
+        } else {
+            return data;
+        }
+
+    } catch (error) {
+        return rejectWithValue(error);
+    }
+
+})
+
+
 export const postUpload = createAsyncThunk("postUpload", async (formData, { rejectWithValue }) => {
     try {
 
